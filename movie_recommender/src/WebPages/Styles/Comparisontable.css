@@ -1,0 +1,142 @@
+/* ======================
+   Container for Comparison Table
+========================= */
+.comparison-table-wrapper {
+  padding-top: 100px; /* Adjust for fixed navbar */
+  text-align: center;
+  background: linear-gradient(to bottom, #2b0a2d, #420c38); /* Optional background */
+  color: #fff;
+}
+
+.comparison-table-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.comparison-table-description {
+  font-size: 16px;
+  color: #e5e7eb;
+  max-width: 800px;
+  margin: 0 auto 40px auto;
+  line-height: 1.6;
+}
+
+/* ======================
+   Table Container & Layout
+========================= */
+
+
+.comparison-table-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  background-color: #000;
+}
+
+/* ======================
+   Table Styling
+========================= */
+.comparison-table {
+  /* border-collapse: collapse; */
+  width: 90%;
+  max-width: 1000px;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.comparison-table th {
+  padding: 16px;
+  background-color: #e11dd0;
+  color: #111827;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  border-bottom: 1px solid #cc8ada;
+}
+
+.feature-name {
+  font-weight: 500;
+  color: #374151;
+  text-align: left;
+  padding: 16px;
+  background-color: #f9fafb;
+  border-right: 1px solid #e5e7eb;
+}
+
+.even-row {
+  background-color: #ffffff;
+}
+
+.odd-row {
+  background-color: #f9fafb;
+}
+
+.platform-cell {
+  padding: 16px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.icon {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.positive {
+  color: #10b981;
+}
+
+.negative {
+  color: #ef4444;
+}
+
+.detail-text {
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.platform-logo {
+  height: 28px;
+  width: 28px;
+  margin-bottom: 6px;
+}
+
+/* Hover Effect */
+.comparison-table tr:hover {
+  background-color: #f3f4f6;
+  transition: background-color 0.3s ease;
+}
+
+/* ======================
+   Responsive Styling
+========================= */
+@media (max-width: 768px) {
+  .comparison-table {
+    font-size: 12px;
+  }
+
+  .platform-logo {
+    height: 20px;
+    width: 20px;
+  }
+
+  .detail-text {
+    font-size: 12px;
+  }
+
+  .comparison-table-title {
+    font-size: 24px;
+  }
+
+  .comparison-table-description {
+    font-size: 14px;
+    padding: 0 10px;
+  }
+}

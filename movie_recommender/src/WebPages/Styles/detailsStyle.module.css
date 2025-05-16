@@ -1,0 +1,350 @@
+/* details styling start */
+.detailsBody{
+    position: relative;
+    top:3.5em;
+    display:flex;
+    flex-direction: column;
+    padding: 2em 0em;
+    justify-content:space-evenly;
+    align-items: center;
+   
+}
+.detailsBody::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index:0;
+}
+.infoAndTrailer{
+    height:100%;
+    width:100%;
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 2em 0.5em;
+
+}
+.detailsPrimarySection1{
+    height:100%;
+    width:100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1; 
+}
+.detailsPrimarySection2{
+    height:100%;
+    width:80%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+.posterHolder{
+    height:13.5em;
+    width:9.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: blink  infinite 3s forwards;
+    box-shadow: 2px 2px 3px rgb(226, 223, 223) ,  -2px -2px 3px rgb(236, 236, 238);
+    overflow: hidden;
+    
+}
+@keyframes blink {
+    0%{transform:scale(1,1) ;}
+    50%{transform: scale(1.2,1.2);}
+    100%{transform: scale(1,1);}
+}
+
+.posterHolderAnime{
+    height:13.5em;
+    width:9.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: blink  infinite 3s forwards;
+    box-shadow: 2px 2px 3px rgb(255, 252, 252) ,  -2px -2px 3px rgb(248, 248, 248);
+    overflow: hidden;
+    animation: move 2s forwards ;
+}
+@keyframes move{
+    0%{transform: rotateY(60deg);}
+    50%{transform: rotateX(60deg);}
+    70%{transform: rotateZ(-90deg);}
+    100%{transform: scale(3.3,1.4);box-shadow: none;}
+    
+}
+.border{
+    height:30em;
+    width:8em;
+    position: absolute;
+    transform: rotate(45deg);
+    background-image: linear-gradient(45deg,rgb(255, 0, 234),rgb(255, 113, 248));
+    z-index: 5;
+    animation: borderDeco 2s forwards infinite;
+}
+@keyframes borderDeco {
+    25%{transform: rotate(120deg);}
+    50%{transform: rotate(240deg);}
+    100%{transform: rotate(360deg);}
+}
+ 
+
+.poster{
+    background: rgb(53, 51, 51);
+    height:13em;
+    width:9em;
+    z-index: 10;
+    cursor: pointer;   
+}
+.player{
+    height:300px;
+    width:475px;
+    position: absolute; 
+    display: flex; 
+    background: #000; 
+  
+}
+.closeBtn{
+    font-size: 1.5em;
+    color: aliceblue;
+    cursor: pointer;
+}
+.closeBtn:hover{
+     color: rgba(187, 193, 193, 0.737);
+}
+
+.detailsHolder{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-left: 5.5em;
+}
+.title{
+    color:aliceblue;
+    font-size: 2.5em;
+}
+.genres{
+    color: rgb(238, 1, 255);
+    display: flex;
+}
+.intro{
+    margin: 2em 0em;
+    color:aliceblue;
+}
+.info{
+  
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.infoParts{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    color: aliceblue;
+    
+}
+.infoParts div{
+    display: flex;
+    align-items:center;
+    gap:0.3em;
+}
+/* details styling end */
+
+/* cast styling start */
+.castsHolder{
+    position: relative;
+    margin-top: 2em;
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background:linear-gradient(-60deg,rgba(50, 8, 31, 0.637), rgb(11, 11, 11));
+  
+}
+.castsContainer{
+    margin-top: 0.5em;
+    max-width:90%;
+    max-height:13rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(8em,1fr));
+    overflow: hidden;
+    gap:1em;
+}
+.castDetails{
+    height: 12em;
+    width:8em;
+    margin:0.5em;
+    background: linear-gradient(45deg,rgb(62, 8, 62),rgb(170, 14, 146));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0px 0px 5px white;
+    position: relative;
+   
+}
+.castDetails::before{
+    height: 12em;
+    width:8em;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index:0;
+    content: '';
+    position: absolute; 
+}
+.castDetails:hover{
+    box-shadow: 0px 0px 10px rgb(255, 0, 166);
+    filter: brightness(150%);
+}
+.castName{
+    width:100%;
+    z-index:1;
+    position: relative;
+    top:10em;
+    padding-left: 0.5em;
+}
+
+.showCasts{
+    position: relative;
+    top: 1em;
+    margin-top: 0.6em;
+    width:9em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg,rgba(192, 56, 167, 0.782),rgb(67, 11, 49));
+    border:none;
+    padding:0.3em 1em;
+    border-radius: 1em;
+    box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.826);
+    color:aliceblue;
+    cursor: pointer;
+}
+.showCasts:hover{
+    background:linear-gradient(45deg,rgba(255, 0, 208, 0.642),rgba(143, 123, 143, 0.858));
+
+}
+/* cast styling end */
+
+/* loader styling start */
+.bodyDoub{
+    background: linear-gradient(120deg, rgb(73, 1, 73), black);
+    position: absolute;
+    z-index: 1000;
+    top:3.5em;
+    bottom: 0;
+    left:0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loaderOuterLayer{
+
+    height: 3em;
+    width:3em;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    z-index: 5;
+    position: absolute;
+}
+.loaderInnerLayer{
+    background:linear-gradient(120deg, rgb(73, 1, 73), black);
+    height: 2.5em;
+    width:2.5em;
+    border-radius: 50%;
+    z-index: 1;
+}
+.loader{
+    height:10em;
+    width:2em;
+    background:lavender;
+    position: absolute;
+    z-index: 0;
+    animation: borderDeco 2s forwards infinite;
+}
+
+.recommendationsSection {
+    width: 90%;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: #111; /* optional: for visual consistency */
+    border-radius: 12px;
+  }
+  
+.watchMovieSection {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+
+ /* loader styling end */
+
+
+/* for large screen styling */
+
+@media (min-width:1441px) {
+    .detailsBody{
+        top:4.5vw;
+        padding-bottom: 2.5vw;
+    }
+   .posterHolder{
+    height: 16.5vw;
+    width:11.5vw;
+   }
+   .posterHolderAnime{
+    height: 16.5vw;
+    width:11.5vw;
+   }
+   .poster{
+    height:16vw ;
+    width: 11vw;
+   }
+   .detailsHolder{
+    font-size: 1.5vw;
+   }
+   .player{
+    height:22vw;
+    width:38vw;
+   }
+   .castsHolder{
+    font-size: 1.5vw;
+   }
+   .castsContainer{
+    gap:0.5em;
+    max-height: 16vw;
+   }
+   .castDetails{
+    height:15vw;
+    width: 11vw;
+   }
+   .castDetails::before{
+    height:15vw;
+    width:11vw;
+}
+   .castName{
+    top:9vw;
+}
+
+   .showCasts{
+    font-size: 1.2vw;
+   }
+   .bodyDoub{
+    top:4vw;
+   }
+   
+}

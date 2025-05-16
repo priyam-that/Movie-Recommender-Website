@@ -1,0 +1,136 @@
+.bodyDoub{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background-color: rgba(36, 36, 36, 0.780);
+    z-index: 15;
+}
+/* container to hold the wheel */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position:fixed;
+    left:30%;
+   
+    z-index: 10;
+    width:40%;
+    height: 100%;
+ 
+    animation: view 0.3s forwards;
+    z-index: 16;
+  }
+  @keyframes view { 
+    from{
+      transform:scale(0,0);
+    }
+    to{
+      transform: scale(1,1);
+    }
+    
+  }
+  
+  /* Wheel Container */
+  .wheelContainer {
+    width: 310px;
+    height: 310px;
+    border-radius: 50%;
+    position: absolute;
+    top:7.7em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Spinning Wheel */
+  .wheel {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgb(255, 208, 0);
+    position: relative;
+    transition: transform 5s ease-out;
+  }
+  
+  /* Individual Segments */
+  .segment {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(50% 50%, 100% 50%, 100% 100%);
+    transform-origin: 50% 50%;
+  }
+  .text{
+    position: absolute;
+    top: 55%;
+    left: 65%;
+    transform:  rotate(25deg); /* Adjust rotation */
+
+    font-size: 1.2em;
+    font-weight: bold;
+    color: rgb(255, 240, 252);
+    text-shadow: 3px 3px 3px black;
+    text-align: center;
+    white-space: nowrap;
+    z-index: 10;
+  }
+  
+  /* Pointer at the top */
+  .pointer {
+    clip-path: polygon(50% 100%, 0 0, 100% 0);
+    position: absolute;
+    top:7px;
+    background:linear-gradient(60deg,rgb(255, 183, 0) , rgb(29, 21, 124), rgb(0, 247, 255));
+    width: 1.2em;
+    height: 2em;
+    z-index: 10;
+  }
+  
+  /* Spin Button */
+  .spinButton {
+    position: absolute;
+    height: 4em;
+    width: 4em;
+    border-radius: 50%;
+    cursor: pointer;
+    background: linear-gradient(60deg,rgb(255, 183, 0) , rgb(244, 237, 20), rgb(255, 140, 0));
+    color: rgb(0, 0, 0);
+    top:18.7em;
+  }
+  
+  .spinButton:hover {
+    background: linear-gradient(60deg,rgb(229, 166, 4) , rgb(201, 195, 18), rgb(219, 124, 8));
+  }
+  
+  /* Reward Display */
+  .reward {
+
+    position: relative;
+    top: 9.5em;
+    font-size:1.5em;
+    font-weight: 500;
+    color:aliceblue;
+    text-shadow: 3px 3px 3px  rgb(0, 0, 0);
+  }
+  .backButton{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width:2.5em;
+    height:2.5em;
+    position:absolute;
+    right:0;
+    top:3.5em;
+    color: aliceblue;
+    background:red;
+    cursor: pointer;
+  }
+  .backButton:hover{
+    background: rgba(233, 6, 6, 0.922);
+    transform: scale(0.9,0.9);
+    transition: all ease-in 0.1s;
+  }
