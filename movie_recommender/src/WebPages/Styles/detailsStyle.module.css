@@ -348,3 +348,173 @@
    }
    
 }
+
+/* Responsive adjustments for Details Page */
+
+@media (max-width: 1024px) {
+    .detailsBody {
+        padding: 1.5em 0;
+        top: 3.5em; /* Adjust if navbar changes height significantly */
+    }
+    .infoAndTrailer {
+        padding: 1.5em 0.5em;
+    }
+    .title {
+        font-size: 2.2em;
+    }
+    .detailsHolder {
+        padding-left: 4em;
+    }
+    .player { /* Trailer player */
+        width: 420px; /* Slightly smaller */
+        height: 270px;
+    }
+    .castsContainer {
+        max-width: 95%;
+    }
+}
+
+@media (max-width: 768px) {
+    .detailsBody {
+        top: auto; /* If navbar is column, detailsBody might not need fixed top if navbar is also not fixed or static */
+        padding-top: calc(3.5em + 2em); /* Assuming navbar stacks and becomes ~2em taller, plus initial padding */
+    }
+    .infoAndTrailer {
+        flex-direction: column; /* Stack poster/info and trailer sections */
+        align-items: center;
+        gap: 2em;
+        padding: 1em 0.2em;
+    }
+    .detailsPrimarySection1 { /* Poster and basic info */
+        width: 90%;
+        align-items: center; /* Center content when stacked */
+    }
+    .detailsPrimarySection2 { /* Trailer video placeholder - if it exists and is separate */
+        width: 90%;
+    }
+    .posterHolder, .posterHolderAnime {
+        height: 12em;
+        width: 8.5em;
+    }
+    .poster {
+        height: 11.5em;
+        width: 8em;
+    }
+    .detailsHolder {
+        padding-left: 1em; /* Reduce padding, align items to center if text is centered */
+        align-items: center; /* Center text content */
+        text-align: center;
+    }
+    .title {
+        font-size: 1.8em;
+    }
+    .genres {
+        justify-content: center; /* Center genres */
+        flex-wrap: wrap;
+    }
+    .intro {
+        margin: 1em 0;
+        font-size: 0.9em;
+    }
+    .info {
+        flex-direction: column; /* Stack info parts */
+        align-items: center; /* Center info parts */
+        gap: 0.5em;
+    }
+    .infoParts div {
+        justify-content: center; /* Center individual info lines */
+    }
+
+    .player { /* Trailer player */
+        position: relative; /* Make it part of the flow when stacked */
+        width: 90%;   /* Responsive width */
+        max-width: 400px; /* Max width */
+        height: auto; /* Maintain aspect ratio */
+        aspect-ratio: 16/9; /* Common video aspect ratio */
+    }
+    .closeBtn { /* For closing trailer if it's a modal */
+        font-size: 1.2em;
+    }
+
+    .castsHolder {
+        margin-top: 1.5em;
+    }
+    .castsContainer {
+        max-width: 100%;
+        padding: 0 0.5em; /* Add some padding if full width */
+        grid-template-columns: repeat(auto-fit,minmax(7em,1fr)); /* Smaller cards */
+        gap: 0.5em;
+    }
+    .castDetails {
+        height: 11em;
+        width: 7em;
+        margin: 0.3em;
+    }
+    .castDetails::before { /* Adjust pseudo-element if used for overlay */
+        height: 11em;
+        width: 7em;
+    }
+    .castName {
+        top: 9em; /* Adjust based on new card height */
+        font-size: 0.9em;
+    }
+    .showCasts {
+        font-size: 0.9em;
+        padding: 0.3em 0.8em;
+    }
+
+    .recommendationsSection {
+        width: 95%;
+        margin: 1.5rem auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .detailsBody {
+        padding-top: calc(3.5em + 4em); /* Further adjust for potentially taller navbar */
+    }
+    .posterHolder, .posterHolderAnime {
+        height: 10em;
+        width: 7em;
+    }
+    .poster {
+        height: 9.5em;
+        width: 6.5em;
+    }
+    .title {
+        font-size: 1.5em;
+    }
+    .intro {
+        font-size: 0.85em;
+    }
+    .genres span { /* Assuming genres are in spans */
+        font-size: 0.8em;
+    }
+    .infoParts {
+        font-size: 0.9em;
+    }
+
+    .player {
+        /* Already responsive from 768px, no major changes needed unless further size reduction */
+    }
+    .castsContainer {
+        grid-template-columns: repeat(auto-fit,minmax(6em,1fr)); /* Even smaller cards */
+    }
+    .castDetails {
+        height: 10em;
+        width: 6em;
+    }
+     .castDetails::before {
+        height: 10em;
+        width: 6em;
+    }
+    .castName {
+        top: 8em;
+        font-size: 0.8em;
+    }
+    .recommendationsSection {
+        width: 100%;
+        border-radius: 0;
+        padding: 0.5rem;
+    }
+}

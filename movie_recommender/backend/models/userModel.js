@@ -12,7 +12,14 @@ const userSchema = new mongoose.Schema({
     tokens: { 
         type: Number, 
         default: 0 
-    },  
+    },
+    wishlist: [
+        {
+            id: { type: Number, required: true },
+            title: { type: String, required: true },
+            poster_path: { type: String, required: true },
+        },
+    ],
 },{
     timestamps: true
 })

@@ -172,15 +172,70 @@
 
 
 @media (max-width: 768px) {
+    .footer {
+        height: auto; /* Allow height to adjust to content */
+        padding: 1.5em 0; /* Add padding when stacked */
+    }
     .container {
         flex-direction: column;
+        align-items: center; /* Center sections when stacked */
+        padding-left: 1em; /* Adjust padding */
+        padding-right: 1em;
+        gap: 1.5em; /* Add gap between stacked sections */
+    }
+    .footer::before { /* Adjust pseudo-element if needed */
+        height: 100%; /* Cover the new auto height */
     }
 
-    .footerSection {
-        margin: 10px 0;
+    .footerSectionAbout, .footerSectionLinks, .footerSectionContact {
+        width: 90%; /* Control width of sections */
+        margin-top: 0; /* Remove top margin as gap is used */
+        text-align: center; /* Center text within sections */
     }
+    .footerSectionAbout h3, .footerSectionLinks h3, .footerSectionContact h3 {
+        font-size: 18px; /* Slightly smaller section titles */
+        text-align: center; /* Ensure titles are centered */
+    }
+    .footerSectionAbout p, .footerSectionLinks ul, .footerSectionContact p {
+        font-size: 13px; /* Smaller text */
+    }
+    .socials {
+        margin-top: 15px;
+    }
+    .socials a {
+        font-size: 18px;
+    }
+    .footerBottom {
+        font-size: 13px;
+        padding: 15px 0;
+        height: auto; /* Adjust height */
+    }
+}
 
-        .footerSection h3 {
-            text-align: left;
-        }
+@media (max-width: 480px) {
+    .footer {
+        padding: 1em 0;
+    }
+    .container {
+        gap: 1em;
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+    }
+     .footerSectionAbout h3, .footerSectionLinks h3, .footerSectionContact h3 {
+        font-size: 16px;
+    }
+    .footerSectionAbout p, .footerSectionLinks ul, .footerSectionContact p {
+        font-size: 12px;
+    }
+    .socials {
+        margin-top: 10px;
+    }
+    .socials a {
+        font-size: 16px;
+        margin-right: 8px;
+    }
+    .footerBottom {
+        font-size: 12px;
+        padding: 10px 0;
+    }
 }
