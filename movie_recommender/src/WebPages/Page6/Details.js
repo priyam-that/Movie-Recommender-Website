@@ -12,6 +12,7 @@ import Recommendations from "./Recommendations";
 import Loader from "./Loader";
 import Comment from "./Comment";
 import Watchmovie from "./Watchmovie";
+import { addToWishlistAPI } from "../../helpers/apiHelper.js";
 
 const Details = () => {
   const getTitle = useLocation(); //used to get the passed propswhen redirected
@@ -33,6 +34,7 @@ const Details = () => {
   const [showLessBtn, setShowLessBtn] = useState(false); //used to show less number of casts
   const [recommendedMovies, setRecommendedMovies] = useState([]); //used to store recommended movie names
   const [loading, setLoading] = useState(false); //used to show the loader or not
+  const [isWishlisted, setIsWishlisted] = useState(false);
   const borderRef = useRef(); //used to get the reference of outline of the poster
   const [user, setUser] = useState(null);
   const api_key = "1131ab6f7e96fcc1c729699cbf8b22cc";
@@ -195,6 +197,36 @@ const Details = () => {
     }
   };
   
+  const handleAddToWishlist = async () => {
+    if (!content || !content.id || !content.title || !content.poster_path) {
+      console.error("Movie data is incomplete for wishlist action.");
+      alert("Cannot add to wishlist: movie data is incomplete.");
+      return;
+    }
+
+    const movieData = {
+      id: content.id,
+      title: content.title,
+      poster_path: content.poster_path,
+      // Assuming release_date and vote_average might be useful for the wishlist item display
+      release_date: content.release_date,
+      vote_average: content.vote_average,
+    };
+
+    try {
+      const response = await addToWishlistAPI(movieData);
+      if (response.success) { // Assuming 'success' is the key indicating success from your API
+        setIsWishlisted(true);
+        alert(response.message || "Movie added to wishlist!");
+      } else {
+        // Handle cases like "already in wishlist" or other specific messages from API
+        alert(response.message || "Failed to add movie to wishlist.");
+      }
+    } catch (error) {
+      console.error("Error calling addToWishlistAPI:", error);
+      alert("An error occurred while trying to add the movie to your wishlist.");
+    }
+  };
 
   return (
     <>
@@ -401,7 +433,9 @@ const Details = () => {
                     <button onClick={handleDeductToken}>
                         Watch Movie (10000 Token)
                     </button>
-
+                    <button onClick={handleAddToWishlist} style={{marginLeft: '10px'}}>
+                        Add to Wishlist
+                    </button>
                     </div>
              
             {/* creating a div that holds the cast container and text the casts */}
