@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux"; // Add this import
+import { toast } from "react-toastify"; // Add this import
 import style from "../Styles/detailsStyle.module.css";
 import ReactPlayer from "react-player";
 import { RxCross2 } from "react-icons/rx";
@@ -6,17 +8,20 @@ import { useLocation } from "react-router-dom";
 import { FaCalendarDays } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa";
 import { FaClock } from "react-icons/fa6";
+import { FaHeart } from "react-icons/fa"; // Add this import for wishlist icon
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
 import Recommendations from "./Recommendations";
 import Loader from "./Loader";
 import Comment from "./Comment";
 import Watchmovie from "./Watchmovie";
-import { addToWishlistAPI } from "../../helpers/apiHelper.js";
+import WishlistPage from "../Page10/WishlistPage";
+import SummaryApi from "../../common"; // Add this import
 
 const Details = () => {
   const getTitle = useLocation(); //used to get the passed propswhen redirected
   const [movieName, setMovieName] = useState(""); //used to get the movie name that is selected to watch the details
+  const userDetails = useSelector(state => state.user.user); // Add this line
 
   //setting the movie name which is selected
   useEffect(() => {
@@ -34,9 +39,10 @@ const Details = () => {
   const [showLessBtn, setShowLessBtn] = useState(false); //used to show less number of casts
   const [recommendedMovies, setRecommendedMovies] = useState([]); //used to store recommended movie names
   const [loading, setLoading] = useState(false); //used to show the loader or not
-  const [isWishlisted, setIsWishlisted] = useState(false);
   const borderRef = useRef(); //used to get the reference of outline of the poster
   const [user, setUser] = useState(null);
+  const [isInWishlist, setIsInWishlist] = useState(false); // Add this state
+  const [wishlistLoading, setWishlistLoading] = useState(false); // Add this state
   const api_key = "1131ab6f7e96fcc1c729699cbf8b22cc";
 
   //function to manage the transition from poster to player
@@ -55,6 +61,108 @@ const Details = () => {
     setBtnClicked(false);
     setShowPlayer(false);
     setShowPoster(true);
+  };
+
+  // Add this function to check if movie is in wishlist
+  const checkWishlistStatus = async () => {
+    if (!userDetails?._id || !content.id) return;
+    
+    try {
+      const response = await fetch(SummaryApi.getWishlist.url, {
+        method: SummaryApi.getWishlist.method,
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+      });
+      const data = await response.json();
+      if (response.ok) {
+        const wishlist = data.wishlist || [];
+        setIsInWishlist(wishlist.some(movie => movie.id === content.id));
+      }
+    } catch (err) {
+      console.error('Error checking wishlist status:', err);
+    }
+  };
+
+  // Add this function to handle adding/removing from wishlist
+  const handleWishlistToggle = async () => {
+    if (!userDetails?._id) {
+      toast.error("Please login to add movies to wishlist.");
+      return;
+    }
+
+    if (!content.id || !content.title) {
+      toast.error("Movie information not available.");
+      console.error('Missing movie data:', { id: content.id, title: content.title });
+      return;
+    }
+
+    setWishlistLoading(true);
+    
+    try {
+      if (isInWishlist) {
+        // Remove from wishlist
+        const response = await fetch(SummaryApi.wishlistRemove.url, {
+          method: SummaryApi.wishlistRemove.method,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ movieId: content.id }),
+          credentials: 'include',
+        });
+        const data = await response.json();
+        
+        console.log('Remove response:', data); // Debug log
+        
+        if (response.ok) {
+          toast.success(data.message || 'Movie removed from wishlist!');
+          setIsInWishlist(false);
+        } else {
+          toast.error(data.message || 'Failed to remove movie from wishlist.');
+          console.error('Remove error:', data);
+        }
+      } else {
+        // Add to wishlist - include all necessary movie data
+        const movieData = {
+          id: content.id,
+          title: content.title || content.original_title,
+          poster_path: content.poster_path,
+          backdrop_path: content.backdrop_path,
+          release_date: content.release_date,
+          vote_average: content.vote_average,
+          overview: content.overview,
+          genre_ids: content.genres ? content.genres.map(g => g.id) : [],
+          adult: content.adult || false,
+          original_language: content.original_language,
+          original_title: content.original_title,
+          popularity: content.popularity,
+          video: content.video || false,
+          vote_count: content.vote_count
+        };
+
+        console.log('Sending movie data to wishlist:', movieData); // Debug log
+
+        const response = await fetch(SummaryApi.wishlistAdd.url, {
+          method: SummaryApi.wishlistAdd.method,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(movieData),
+          credentials: 'include',
+        });
+        const data = await response.json();
+        
+        console.log('Add response:', data); // Debug log
+        
+        if (response.ok) {
+          toast.success(data.message || 'Movie added to wishlist!');
+          setIsInWishlist(true);
+        } else {
+          toast.error(data.message || 'Failed to add movie to wishlist.');
+          console.error('Add error:', data);
+        }
+      }
+    } catch (err) {
+      toast.error('An error occurred. Please try again.');
+      console.error('Wishlist error:', err);
+    } finally {
+      setWishlistLoading(false);
+    }
   };
 
   //fetching all about the movie
@@ -132,6 +240,13 @@ const Details = () => {
     }
   }, [movieName]);
 
+  // Add this useEffect to check wishlist status when content loads
+  useEffect(() => {
+    if (content.id && userDetails?._id) {
+      checkWishlistStatus();
+    }
+  }, [content.id, userDetails?._id]);
+
   //function to show more casts
   const appearMore = () => {
     const container = document.getElementById("castContainer");
@@ -152,20 +267,19 @@ const Details = () => {
     setShowMoreBtn(true);
   };
 
-
   const fetchUpdatedUser = async () => {
     try {
       const response = await fetch("/api/user/profile", {
         method: "GET",
         credentials: "include", // important to send cookie
       });
-  
+
       const data = await response.json();
-  
+
       if (response.ok) {
         // update user state with the new data
-       
-        setUser(data); 
+
+        setUser(data);
       } else {
         console.error("Failed to fetch user:", data.message);
       }
@@ -173,58 +287,26 @@ const Details = () => {
       console.error("Error fetching updated user:", error);
     }
   };
-  
 
   const handleDeductToken = async () => {
     try {
       const response = await fetch("http://localhost:7070/api/deduct/token", {
-        method: 'POST',
+        method: "POST",
         credentials: "include", // send cookie to backend
       });
-  
+
       const data = await response.json();
-  
+
       if (response.ok) {
         alert(" token deducted successfully!");
         // Optionally fetch user data again to update UI
         fetchUpdatedUser(); // or update token count manually if needed
       } else {
-        alert(data.message); 
+        alert(data.message);
       }
     } catch (error) {
       console.error("Token deduction failed:", error);
       alert("Something went wrong!");
-    }
-  };
-  
-  const handleAddToWishlist = async () => {
-    if (!content || !content.id || !content.title || !content.poster_path) {
-      console.error("Movie data is incomplete for wishlist action.");
-      alert("Cannot add to wishlist: movie data is incomplete.");
-      return;
-    }
-
-    const movieData = {
-      id: content.id,
-      title: content.title,
-      poster_path: content.poster_path,
-      // Assuming release_date and vote_average might be useful for the wishlist item display
-      release_date: content.release_date,
-      vote_average: content.vote_average,
-    };
-
-    try {
-      const response = await addToWishlistAPI(movieData);
-      if (response.success) { // Assuming 'success' is the key indicating success from your API
-        setIsWishlisted(true);
-        alert(response.message || "Movie added to wishlist!");
-      } else {
-        // Handle cases like "already in wishlist" or other specific messages from API
-        alert(response.message || "Failed to add movie to wishlist.");
-      }
-    } catch (error) {
-      console.error("Error calling addToWishlistAPI:", error);
-      alert("An error occurred while trying to add the movie to your wishlist.");
     }
   };
 
@@ -425,19 +507,66 @@ const Details = () => {
                 </section>
               </div>
             </div>
-    {/* Add MovieWatch component here */}
-                    <div style={{display :"flex",justifyContent:"center",alignItems:"center"}}>
-                    <div className={style.watchMovieSection}>
-              <Watchmovie movieTitle={content.title} />
+
+            {/* Action buttons section */}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "20px",
+                margin: "20px 0",
+                flexWrap: "wrap"
+              }}
+            >
+              {/* Watch Movie Button */}
+              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <div className={style.watchMovieSection}>
+                  <Watchmovie movieTitle={content.title} />
+                </div>
+                <button onClick={handleDeductToken} className={style.actionButton}>
+                  Watch Movie (10000 Token)
+                </button>
+              </div>
+
+              {/* Wishlist Button - Only show if user is logged in */}
+              {userDetails?._id && (
+                <button 
+                  onClick={handleWishlistToggle}
+                  disabled={wishlistLoading}
+                  className={`${style.wishlistButton} ${isInWishlist ? style.inWishlist : ''}`}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    padding: "10px 20px",
+                    backgroundColor: isInWishlist ? "#e91e63" : "transparent",
+                    border: "2px solid #e91e63",
+                    color: isInWishlist ? "white" : "#e91e63",
+                    borderRadius: "5px",
+                    cursor: wishlistLoading ? "not-allowed" : "pointer",
+                    fontSize: "16px",
+                    fontWeight: "bold",
+                    transition: "all 0.3s ease",
+                    opacity: wishlistLoading ? 0.7 : 1
+                  }}
+                >
+                  <FaHeart 
+                    style={{ 
+                      fontSize: "1.2em",
+                      color: isInWishlist ? "white" : "#e91e63"
+                    }} 
+                  />
+                  {wishlistLoading 
+                    ? "Loading..." 
+                    : isInWishlist 
+                      ? "Remove from Wishlist" 
+                      : "Add to Wishlist"
+                  }
+                </button>
+              )}
             </div>
-                    <button onClick={handleDeductToken}>
-                        Watch Movie (10000 Token)
-                    </button>
-                    <button onClick={handleAddToWishlist} style={{marginLeft: '10px'}}>
-                        Add to Wishlist
-                    </button>
-                    </div>
-             
+
             {/* creating a div that holds the cast container and text the casts */}
             <div className={style.castsHolder}>
               {/* title text for casts */}
@@ -537,16 +666,11 @@ const Details = () => {
               recommendedMovies={recommendedMovies}
               setLoading={setLoading}
             />
-            {/* Add MovieWatch component here
-            <div className={style.watchMovieSection}>
-              <Watchmovie movieTitle={content.title} />
-            </div> */}
 
             {/* Custom Comments Section */}
             {content.id && (
               <Comment movieId={content.id} movieTitle={content.title} />
             )}
-            
           </>
         )
       }
