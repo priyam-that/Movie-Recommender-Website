@@ -17,6 +17,18 @@ const SummaryApi ={
     logout_user :{
         url:`${backendDomain}/api/userLogout`,
         method : "get"
+    },
+    wishlistAdd: {
+        url: `${backendDomain}/api/wishlist/add`,
+        method: 'post'
+    },
+    wishlistRemove: {
+        url: `${backendDomain}/api/wishlist/remove`,
+        method: 'post'
+    },
+    getWishlist: {
+        url: `${backendDomain}/api/wishlist`,
+        method: 'get'
     }
 }
 

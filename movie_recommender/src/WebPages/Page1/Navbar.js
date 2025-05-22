@@ -6,7 +6,7 @@ import Search from "../Page3/Search";
 import { FaHome } from "react-icons/fa";
 import { TbMovie } from "react-icons/tb";
 import { BiMovie } from "react-icons/bi";
-import { FaBloggerB } from "react-icons/fa";
+import { FaBloggerB, FaHeart } from "react-icons/fa"; // Added FaHeart
 import { FaCircleUser } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import SummaryApi from "../../common";
@@ -233,6 +233,29 @@ const Navbar = () => {
                 to="/dashboard"
               >
                 Dashboard
+              </Link>
+            </li>
+          )}
+          {/* Conditionally show Wishlist if user is logged in */}
+          {user?._id && (
+            <li className={style.navItems}>
+              <Link
+                className={
+                  location.pathname === "/wishlist"
+                    ? style.activeNav
+                    : style.navAnchor
+                }
+                to="/wishlist"
+              >
+                <FaHeart
+                  style={{
+                    position: "relative",
+                    top: "2px",
+                    fontSize: "1.2em", // Adjust as needed
+                    right: "5px",
+                  }}
+                />
+                Wishlist
               </Link>
             </li>
           )}

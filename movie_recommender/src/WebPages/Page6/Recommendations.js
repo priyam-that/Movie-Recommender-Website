@@ -42,7 +42,7 @@ const Recommendations = ({ recommendedMovies }) => {
                         <div className={style.cardDetailsContainer}>
                           <div className={style.card}>
 
-                            <img className={style.cardImage} src={`https://image.tmdb.org/t/p/w500${curMovie.poster_path}`} alt="..." />
+                            <img loading="lazy" className={style.cardImage} src={`https://image.tmdb.org/t/p/w500${curMovie.poster_path}`} alt={curMovie.title} />
                             <div className={style.rating}><TiStarFullOutline style={{ color: "#0e0707" }} /> {curMovie.vote_average}</div>
                           </div>
                           <div className={style.cardName}>{curMovie.title.length > 25 ? curMovie.title.slice(0, 25) + "..." : curMovie.title}</div>

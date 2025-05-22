@@ -18,6 +18,7 @@ import { setUserDetails } from "./store/userSlice";
 import { useDispatch } from "react-redux";
 import Dashboard from "./WebPages/Page4/Dashboard";
 import Upgrade from "./WebPages/Page9/Upgrade.jsx";
+import WishlistPage from "./WebPages/Page10/WishlistPage"; // Import WishlistPage
 const App = () => {
   const [showFooter, setShowFooter] = useState(false);
   const dispatch = useDispatch();
@@ -69,6 +70,7 @@ const App = () => {
             <Route exact path="/Blogs" element={<Blogs />}></Route>
             <Route exact path="/Dashboard" element={<Dashboard />}></Route>
             <Route exact path="/Upgrade" element={<Upgrade />}></Route>
+            <Route exact path="/wishlist" element={<WishlistPage />}></Route> {/* Add WishlistPage route */}
 
             {/* <Route exact path='/' element={<Main/>}></Route> */}
           </Routes>

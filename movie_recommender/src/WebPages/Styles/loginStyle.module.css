@@ -186,3 +186,66 @@ input:focus {
        font-size: 1.2vw;
     }
 }
+
+/* Responsive adjustments for Login/Signup/ForgotPass Pages */
+
+@media (max-width: 768px) {
+    .bg {
+        padding: 1.2em; /* Slightly reduce padding */
+        width: 60vw; /* Adjust width for tablets */
+        max-width: 450px; /* Max width to prevent it from becoming too large on wider tablets */
+    }
+
+    input, .login, .passwordHolder {
+        font-size: 0.95em; /* Adjust font size for better readability */
+    }
+
+    .icons {
+        width: 4.5em;
+        height: 4.5em;
+    }
+     .bodyMask { /* If navbar height is changing, this might need adjustment */
+        top: calc(3.5em + 1em); /* Example: if navbar stacks and becomes taller */
+        /* Or ensure navbar fixed height is maintained across views where this mask is active */
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding-top: 4em; /* Ensure content is below potentially stacked navbar */
+        align-items: flex-start; /* Align to top if content might overflow */
+        overflow-y: auto; /* Allow scrolling if content is too tall */
+    }
+    .bg {
+        padding: 1em;
+        width: 90vw; /* Make form container wider on small phones */
+        max-width: none; /* Remove max-width constraint */
+        margin-top: 1em; /* Add some margin from top */
+        margin-bottom: 1em; /* Add margin at bottom for scroll */
+    }
+
+    input, .login, .passwordHolder {
+        font-size: 0.9em; /* Further adjust font size */
+    }
+    .login {
+        padding: 0.4em 1em; /* Ensure button is tappable */
+    }
+
+    .icons {
+        width: 4em;
+        height: 4em;
+    }
+
+    .Signup {
+        font-size: 0.9em;
+    }
+    .profilePicBtn {
+        font-size: 0.65em;
+        width: 6.5em;
+    }
+    .bodyMask {
+        top: 0; /* Should cover entire screen behind the form, assuming navbar isn't part of login page visually */
+        /* If navbar IS part of login page, adjust 'top' based on stacked navbar height */
+        /* top: calc(3.5em + X); where X is the additional height of stacked navbar */
+    }
+}

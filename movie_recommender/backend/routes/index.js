@@ -11,6 +11,8 @@ const {
     deductTokenController
   } = require('../controller/token');// Import token update controller
 const updateProfilepic  = require('../controller/updateProfilepic');
+const { addToWishlist, removeFromWishlist, getWishlist } = require('../controller/wishlistController');
+
 // Routes 
 router.post("/signup",userSignUpController)
 router.post("/signin",userSignInController)
@@ -22,5 +24,10 @@ router.post('/deduct/token', authToken,  deductTokenController);
 
 
 router.put("/update-profile-pic", authToken, updateProfilepic)
+
+// Wishlist routes
+router.post("/wishlist/add", authToken, addToWishlist);
+router.post("/wishlist/remove", authToken, removeFromWishlist);
+router.get("/wishlist", authToken, getWishlist);
 
 module.exports = router

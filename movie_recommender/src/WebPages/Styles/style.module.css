@@ -528,9 +528,18 @@ li {
 }
 .slidingContainer{
     position: relative;
-    right: 0;
+    /* right: 0; */ /* Replaced by transform */
     display: flex;
-    transition: all ease-in 0.5s;
+    transition: transform 0.5s ease-in-out; /* Specific transition for transform */
+    /* --slide-translate-x-1 and --slide-translate-x-2 will be set inline */
+}
+
+#slidingContainer1 {
+    transform: translateX(var(--slide-translate-x-1, 0px));
+}
+
+#slidingContainer2 {
+    transform: translateX(var(--slide-translate-x-2, 0px));
 }
 
 
@@ -549,7 +558,42 @@ li {
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin: 0.8em;
+    /* margin: 0.8em; */ /* Margin moved to movieCardWrapper */
+}
+
+.movieCardWrapper {
+    position: relative; /* For absolute positioning of wishlist button */
+    margin: 0.8em; /* Takes over margin from cardDetailsContainer for grid spacing */
+    /* The rest of cardDetailsContainer's original styles (height, width, display, align, flex-direction)
+       are still relevant for cardDetailsContainer itself, not this wrapper. */
+}
+
+.clickableCardArea {
+    /* No specific styles needed unless it needs to alter layout previously handled by cardDetailsContainer */
+    /* display: flex; flex-direction: column; align-items: center; */ /* If these were on cardDetailsContainer and are needed here */
+}
+
+.wishlistButton {
+    position: absolute;
+    top: 8px; /* Adjust to look good on the card */
+    right: 8px; /* Adjust to look good on the card */
+    background-color: rgba(10, 10, 10, 0.6); /* Darkish semi-transparent background */
+    border: none;
+    color: #fff; /* White icon */
+    cursor: pointer;
+    font-size: 1.2rem; /* Size of the icon */
+    padding: 0.4rem; /* Padding around the icon */
+    border-radius: 50%; /* Make it circular */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2; /* Above card image, below modals/nav */
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+}
+
+.wishlistButton:hover {
+    background-color: rgba(220, 50, 50, 0.8); /* Reddish on hover */
+    transform: scale(1.1);
 }
 
 .cardDetailsContainer:hover {
@@ -716,3 +760,323 @@ button:hover{
 
 
 /* lets test the footer */
+
+/* General Responsive Media Queries */
+
+/* Extra Small Devices (phones, 480px and down) */
+@media (max-width: 480px) {
+    /* Navbar adjustments */
+    .navbar {
+        height: auto; /* Allow height to grow if items stack */
+        flex-direction: column; /* Stack subNav1 and subNav2 */
+        padding: 0.5em 0;
+    }
+    .subNav1, .subNav2 {
+        width: 100%;
+        flex-direction: column; /* Stack items within subnavs */
+        align-items: center;
+        text-align: center;
+    }
+    .subNav1 {
+        gap: 0.5em; /* Space between logo and search if stacked */
+    }
+    .subNav2 {
+        font-size: 0.7em; /* Smaller font for nav links */
+        gap: 0.3em; /* Reduce gap between nav items */
+    }
+    .subNav2 ul {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .subNav2 li {
+        margin: 0.2em 0; /* Adjust spacing for stacked items */
+    }
+    .logo {
+        font-size: 1.2em;
+        margin-left: 0;
+    }
+    .searchEngine {
+        width: 90%; /* Make search bar take more width */
+        margin: 0 auto; /* Center it */
+    }
+    .inputSearch {
+        font-size: 0.9em;
+    }
+    .searchBtn {
+        width: 15%;
+        font-size: 0.8em;
+    }
+    .NavbarProfilePic {
+        width: 2rem;
+        height: 2rem;
+        margin-right: 0.5em;
+    }
+    .navItems {
+        padding: 0.3em 0.5em; /* Adjust padding for touch targets */
+    }
+
+    /* Movie Cards */
+    .totalContainer {
+        width: 100%; /* Use full width */
+        flex-direction: column; /* Stack arrows and card container if needed, or just adjust sizes */
+        align-items: center;
+    }
+    .totalContainer button { /* Arrow buttons */
+        font-size: 1.5em; /* Smaller arrows */
+        padding: 0.2em;
+    }
+    .cardContainerBasic {
+        width: 90%; /* Allow some padding on sides */
+        overflow-x: scroll; /* Ensure scrolling if cards don't fit */
+    }
+    .slidingContainer {
+        /* Adjustments might be needed if snapping/item width is an issue */
+    }
+    .movieCardWrapper {
+        margin: 0.5em; /* Smaller margins */
+    }
+    .cardDetailsContainer {
+        height: 12em; /* Smaller card height */
+        width: 7em;   /* Smaller card width */
+    }
+    .card {
+        height: 10em; /* Adjust inner card height */
+    }
+    .cardName {
+        font-size: 0.7em;
+    }
+    .rating {
+        font-size: 0.6em;
+        width: 4.5em;
+        padding: 1px 3px;
+        /* Adjust positioning if it overflows */
+    }
+    .wishlistButton {
+        font-size: 1rem;
+        padding: 0.3rem;
+        top: 5px;
+        right: 5px;
+    }
+
+    /* Slider */
+    .slider {
+        height: 20em; /* Reduce slider height */
+    }
+    .slideTitle {
+        font-size: 1.5em;
+        margin-left: 1em;
+        top: 4em;
+    }
+    .slideCaption { /* This seems to be designed for very narrow text, might need rethink */
+        width: 80%; /* Allow more width */
+        font-size: 0.7em;
+        margin-left: 1em;
+        top: 50%;
+    }
+    .slideShowInfo {
+        padding: 0.5em 1em;
+        top: 70%;
+        gap: 0.5em;
+        flex-direction: column; /* Stack buttons */
+    }
+    .slideShowInfo button {
+        font-size: 0.8em;
+        width: 7em;
+    }
+
+    /* Text */
+    .text1 {
+        font-size: 1.2em;
+        padding: 0.4em 0.8em;
+    }
+    .text2 {
+        font-size: 1em;
+        padding: 0em 0.8em;
+    }
+
+    /* Filter sections */
+    .filterIcon, .activeFilterIcon {
+        width: 15%; /* More width for filter icon button */
+        font-size: 1em;
+    }
+    .filterResultsContainer {
+        left: 0;
+        right: 0;
+        border-radius: 0;
+    }
+    .filterCardContainer {
+        padding: 0em 1em; /* Reduce padding */
+        grid-template-columns: repeat(auto-fit,minmax(6em,1fr)); /* Smaller min card size */
+    }
+    .genreDisplay {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5em;
+        text-align: center;
+    }
+    .filterButtons {
+        flex-direction: column;
+        gap: 0.5em;
+        width: 100%;
+    }
+    .clearFilter, .activateFilter {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    /* Video Player (Trailer) */
+    .videoPlayer {
+        left: 5%;
+        right: 5%;
+        width: 90%;
+    }
+    .closeBtn {
+        font-size: 0.9em;
+    }
+}
+
+/* Small Devices (tablets, 768px and down) */
+@media (max-width: 768px) {
+    /* Navbar adjustments */
+    .navbar {
+        height: auto; /* Allow height to grow if items stack */
+        flex-direction: column; /* Stack subNav1 and subNav2 */
+        padding-bottom: 0.5em;
+    }
+    .subNav1 {
+        width: 100%;
+        padding: 0.5em 0; /* Add some padding when stacked */
+        justify-content: space-around; /* Better spacing for logo and search */
+    }
+    .subNav2 {
+        width: 100%;
+        font-size: 0.75em; /* Slightly larger than 480px */
+        flex-wrap: wrap; /* Allow nav items to wrap */
+        justify-content: center;
+        gap: 0.2em;
+    }
+    .subNav2 ul { /* Assuming ul is the direct child holding li items */
+        justify-content: center;
+        flex-wrap: wrap;
+        padding-left: 0; /* Remove default ul padding */
+    }
+    .logo {
+        font-size: 1.3em;
+    }
+    .searchEngine {
+        width: 60%; /* Adjust search bar width */
+    }
+
+    /* Movie Cards */
+    .totalContainer {
+        width: 98%; /* Slightly more width */
+    }
+    .cardContainerBasic {
+         /* Allow scrolling for carousels if items overflow */
+        justify-content: flex-start; /* Align items to start for scrolling view */
+    }
+    .slidingContainer{
+        /* No change needed if overflow-x on cardContainerBasic handles it */
+    }
+    .movieCardWrapper {
+        margin: 0.6em;
+    }
+    .cardDetailsContainer {
+        height: 13em;
+        width: 7.5em;
+    }
+    .card {
+        height: 11em;
+    }
+    .cardName {
+        font-size: 0.72em;
+    }
+
+    /* Slider */
+    .slider {
+        height: 24em;
+    }
+    .slideTitle {
+        font-size: 1.8em;
+        margin-left: 1.5em;
+    }
+    .slideCaption {
+        width: 60%;
+        font-size: 0.75em;
+    }
+    .slideShowInfo {
+        top: 72%;
+    }
+    .slideShowInfo button {
+        font-size: 0.9em;
+    }
+
+    /* Text */
+    .text1 {
+        font-size: 1.3em;
+    }
+    .text2 {
+        font-size: 1.1em;
+    }
+
+    /* Filter sections */
+    .filterIcon, .activeFilterIcon {
+        width: 10%; 
+    }
+    .filterCardContainer {
+        grid-template-columns: repeat(auto-fit,minmax(7em,1fr));
+    }
+
+     /* Video Player (Trailer) */
+    .videoPlayer {
+        left: 10%;
+        right: 10%;
+        width: 80%;
+    }
+}
+
+/* Medium Devices (laptops, 1024px and down) */
+@media (max-width: 1024px) {
+    .subNav1 {
+        width: 50vw; /* Give a bit more space to search */
+    }
+    .subNav2 {
+        width: 50vw;
+        font-size: 0.78em; /* Adjust font size */
+    }
+    .searchEngine {
+        width: 70%;
+    }
+    .searchResultDiv { /* Search results dropdown */
+        width: 35%; /* Adjust based on searchEngine width */
+    }
+
+    /* Movie Cards */
+    /* Most desktop styles might still be fine, but minor adjustments can be made */
+    .cardDetailsContainer {
+        /* height: 13.5em; width: 7.8em; */ /* Slightly smaller if needed */
+    }
+
+    /* Slider */
+    .slider {
+        height: 26em;
+    }
+    .slideTitle {
+        font-size: 1.9em;
+    }
+
+    /* Filter sections */
+    .filterCardContainer {
+        padding: 0em 2em; /* Adjust padding */
+    }
+    .filterIcon, .activeFilterIcon {
+        width: 7%; 
+    }
+     /* Video Player (Trailer) */
+    .videoPlayer {
+        left: 15%;
+        right: 15%;
+        width: 70%;
+    }
+}

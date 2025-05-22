@@ -68,7 +68,7 @@ const FilterCards = () => {
                                                 {/* a container to contain the image and the ratings */}
                                                 <div className={style.card}>
                                                     {/* movie poster */}
-                                                    <img className={style.cardImage} src={`https://image.tmdb.org/t/p/w500${movieWithGenres.poster_path}`} alt="" />
+                                                    <img loading="lazy" className={style.cardImage} src={`https://image.tmdb.org/t/p/w500${movieWithGenres.poster_path}`} alt={movieWithGenres.title} />
                                                     {/* movie rating */}
                                                     <div className={style.rating}><TiStarFullOutline style={{ color: "#0e0707" }} />{movieWithGenres.vote_average}</div>
                                                 </div>

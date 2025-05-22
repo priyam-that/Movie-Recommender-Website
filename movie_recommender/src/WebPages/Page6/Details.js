@@ -344,9 +344,10 @@ const Details = () => {
                       <div className={style.border} ref={borderRef}></div>
                       <div className={style.poster}>
                         <img
+                          loading="lazy"
                           style={{ height: "100%", width: "100%" }}
                           src={`https://image.tmdb.org/t/p/w500${content.poster_path}`}
-                          alt="..."
+                          alt={content.title || "Movie Poster"}
                         />
                       </div>
                     </div>
