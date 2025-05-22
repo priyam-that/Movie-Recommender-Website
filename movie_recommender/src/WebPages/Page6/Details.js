@@ -142,7 +142,7 @@ const Details = () => {
         const response = await fetch(SummaryApi.wishlistAdd.url, {
           method: SummaryApi.wishlistAdd.method,
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(movieData),
+          body: JSON.stringify({ movie: movieData }),
           credentials: 'include',
         });
         const data = await response.json();
