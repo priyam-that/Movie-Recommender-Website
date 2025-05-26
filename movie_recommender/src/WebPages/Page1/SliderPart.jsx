@@ -1,7 +1,6 @@
 import React,{useState} from 'react'
 import { Slide } from 'react-slideshow-image'
 import 'react-slideshow-image/dist/styles.css'
-import style from '../Styles/style.module.css'
 import Trailer from '../Page5/Trailer'
 import { useNavigate } from 'react-router-dom';
 
@@ -86,7 +85,7 @@ const SliderPart = () => {
   return (
     <>
       {/* creating the slider container */}
-      <div id='slider' className={style.container}>
+      <div id='slider' className="bg-gradient-to-r from-custom-purple/50 to-black h-full w-full xl:text-[1.3vw]">
 
         {/* creating the slider */}
         <Slide arrows={true} 
@@ -94,12 +93,12 @@ const SliderPart = () => {
        nextArrow={<div style={{ fontSize: "30px", color: "white", marginRight: "10px" }}>❯</div>}>
           {slideImages.map((image, index) => (
             <div key={index}>
-              <div className={style.slider} style={{ 'backgroundImage': `url(${image.url})` }}></div>
-              <div className={style.slideTitle}>{image.title}</div>
-              <div className={style.slideCaption}>{image.caption.length<200?image.caption:image.caption.slice(0,200)+" ..."}</div>
-              <div className={style.slideShowInfo}>
-                <button onClick={()=>{navigateToDetails("/Details",{state:{movieTitle:(image.title)}})}}>Details</button>
-                <button onClick={()=>{showTrailerBox(image.trailerUrl)}}>Trailer</button>
+              <div className="flex items-center justify-center bg-cover h-[28em] filter brightness-100 xl:h-[35vw]" style={{ 'backgroundImage': `url(${image.url})`, 'WebkitMaskImage': 'linear-gradient(rgb(0,0,0)_0%,rgba(0,0,0,0)_100%)', 'maskImage': 'linear-gradient(rgb(0,0,0)_30%,rgba(0,0,0,0)_95%)' }}></div>
+              <div className="text-3xl text-white absolute top-[6.5em] ml-8 shadow-text-custom sm:text-2xl sm:ml-4 sm:top-16 md:text-[1.8em] md:ml-6 lg:text-[1.9em]">{image.title}</div>
+              <div className="w-[5%] flex flex-wrap text-xs text-white absolute top-3/5 ml-20 shadow-text-custom sm:w-4/5 sm:text-[0.7em] sm:ml-4 sm:top-1/2 md:w-3/5 md:text-[0.75em]">{image.caption.length<200?image.caption:image.caption.slice(0,200)+" ..."}</div>
+              <div className="p-4 px-16 text-white absolute top-3/4 flex justify-center items-center gap-4 sm:px-4 sm:py-2 sm:top-[70%] sm:gap-2 sm:flex-col md:top-[72%] lg:top-3/4">
+                <button className="h-8 w-24 text-base bg-gradient-to-r from-pink-600/80 to-purple-800 border-none py-1 px-4 rounded-2xl shadow-inner-custom text-white cursor-pointer hover:bg-gradient-to-r hover:from-pink-500/60 hover:to-purple-700/90 sm:text-sm sm:w-28 md:text-[0.9em] xl:mt-[-1em]" onClick={()=>{navigateToDetails("/Details",{state:{movieTitle:(image.title)}})}}>Details</button>
+                <button className="h-8 w-24 text-base bg-gradient-to-r from-pink-600/80 to-purple-800 border-none py-1 px-4 rounded-2xl shadow-inner-custom text-white cursor-pointer hover:bg-gradient-to-r hover:from-pink-500/60 hover:to-purple-700/90 sm:text-sm sm:w-28 md:text-[0.9em] xl:mt-[-1em]" onClick={()=>{showTrailerBox(image.trailerUrl)}}>Trailer</button>
               </div>
             </div>
           ))}

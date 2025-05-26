@@ -1,5 +1,5 @@
 import React from 'react'
-import SliderPart from './SliderPart'
+import SliderPart from './SliderPart.jsx'
 import BasicFetch from './BasicFetch'
 
 const Main = () => {
