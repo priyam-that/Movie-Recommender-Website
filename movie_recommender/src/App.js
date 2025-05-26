@@ -8,7 +8,7 @@ import ForgotPass from "./WebPages/Page4/ForgotPass";
 import SignUp from "./WebPages/Page4/SignUp";
 import Details from "./WebPages/Page6/Details";
 import Blogs from "./WebPages/Page7/Blogs";
-import Footer from "./WebPages/Page8/Footer";
+import Footer from "./WebPages/Page8/Footer.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ScrollToView from "./ScrollToView";
@@ -57,7 +57,7 @@ const App = () => {
         }}
       >
         <ToastContainer />
-        <>
+        <div className="font-serif bg-[linear-gradient(120deg,rgb(73,1,73),black)] h-full">
           <Navbar />
           <ScrollToView />
           <Routes>
@@ -75,7 +75,7 @@ const App = () => {
             {/* <Route exact path='/' element={<Main/>}></Route> */}
           </Routes>
           {showFooter && <Footer />}
-        </>
+        </div>
       </Context.Provider>
     </>
   );

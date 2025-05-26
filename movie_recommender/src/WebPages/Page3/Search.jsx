@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react'
-import style from '../Styles/style.module.css'
 import SearchResult from './SearchResult'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Filter from '../Page2/Filter'
@@ -105,18 +104,20 @@ const Search = () => {
     <>
       <div style={{ display: "flex", flexDirection: "column", width: "55%", height: "60%", marginLeft: "4em", marginRight: "1em" }}>
         {/* search engine consists of searchbar and search button */}
-        <div className={style.searchEngine}>
+        <div className="w-full h-full shadow-md flex justify-center items-center rounded-full bg-gradient-to-br from-custom-purple to-black sm:w-11/12 sm:mx-auto md:w-3/5">
           {/* search bar */}
-          <input onBlur={() => { setShowResultList(false) }} ref={inputRef} autoFocus onKeyDown={(e) => { showDependencyAndRender(e) }} onClick={() => { reShow() }} type="search" placeholder='Search Here...' className={`${style.navItems} ${style.inputSearch}`} value={userInput} onChange={(e) => { handleChange(e.target.value) }} />
+          <input onBlur={() => { setShowResultList(false) }} ref={inputRef} autoFocus onKeyDown={(e) => { showDependencyAndRender(e) }} onClick={() => { reShow() }} type="search" placeholder='Search Here...' className="inline-block w-full h-full pl-4 text-white border-none bg-transparent rounded-l-full shadow-inner-custom focus:outline-none focus:bg-gradient-to-r focus:from-purple-800 focus:to-black placeholder-gray-300 lg:text-lg sm:text-sm" value={userInput} onChange={(e) => { handleChange(e.target.value) }} />
 
           {/* search button */}
-          <div onClick={() => { renderOrNot() }} className={`${style.searchBtn} ${style.linkToDetails}`}><IoSearch style={{ fontSize: "1.2em" }} /></div>
+          <div onClick={() => { renderOrNot() }} className="w-3/12 h-full flex justify-center items-center rounded-r-full bg-transparent shadow-inner-custom-reverse text-white text-shadow-sm cursor-pointer hover:text-fuchsia-500 sm:w-1/5 sm:text-xs"><IoSearch style={{ fontSize: "1.2em" }} /></div>
         </div>
           {/* search results */}
+          {/* SearchResult component will need to be refactored separately if its styles are in style.module.css */}
           <SearchResult showResultList={showResultList} resultList={resultList} setShowResultList={setShowResultList} userInput={userInput} setUserInput={setUserInput} inputRef={inputRef} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} curValue={curValue} />
       </div>
 
       {/* filter button */}
+      {/* Filter component will need to be refactored separately if its styles are in style.module.css */}
       <Filter />
 
 

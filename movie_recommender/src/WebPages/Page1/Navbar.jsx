@@ -1,8 +1,7 @@
 import React from "react";
-import style from "../Styles/style.module.css";
 import { Link, useLocation } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
-import Search from "../Page3/Search";
+import Search from "../Page3/Search.jsx";
 import { FaHome } from "react-icons/fa";
 import { TbMovie } from "react-icons/tb";
 import { BiMovie } from "react-icons/bi";
@@ -50,12 +49,12 @@ const Navbar = () => {
   return (
     <>
       {/* creating the navbar */}
-      <div className={style.navbar}>
+      <div className="bg-gradient-to-r from-custom-purple to-black w-screen h-14 shadow-[0px_0px_5px_5px_rgba(47,44,44,1)] flex justify-evenly fixed z-10 lg:text-lg sm:flex-col sm:h-auto sm:py-2">
         {/* creating to parts of the navbar as subnav1 and subnav2 */}
-        <div className={style.subNav1}>
+        <div className="w-6/12 h-full flex justify-evenly items-center lg:w-7/12 sm:w-full sm:flex-col sm:py-2 sm:gap-2">
           <a href="/">
             <div
-              className={`${style.navItems} ${style.logo}`}
+              className="inline-block ml-4 text-2xl h-8 w-20 flex justify-center items-center cursor-pointer hover:scale-110 transition-all ease-in-out duration-200 sm:text-xl sm:ml-0"
               style={{
                 background: "url(./images/logo.png) no-repeat center / cover",
               }}
@@ -63,130 +62,105 @@ const Navbar = () => {
           </a>
           <Search />
         </div>
-        <ul className={style.subNav2}>
-          <li className={style.navItems}>
+        <ul className="w-5/12 h-full text-xs flex justify-evenly items-center lg:w-5/12 sm:w-full sm:flex-wrap sm:justify-center sm:gap-1 sm:text-[0.7em] sm:flex-col sm:gap-0">
+          <li className="inline-block sm:px-2 sm:py-1">
             {" "}
             <Link
-              className={
+              className={`relative no-underline shadow-text-custom z-0 transition-colors duration-300 ease-in-out ${
                 location.pathname === "/Upgrade"
-                  ? style.activeNav
-                  : style.navAnchor
-              }
+                  ? "text-fuchsia-500"
+                  : "text-gray-100 hover:text-pink-600"
+              }`}
               to="/Upgrade"
             >
               <IoGridOutline
-                style={{
-                  position: "relative",
-                  top: "2px",
-                  fontSize: "1.2em",
-                  right: "5px",
-                }}
+                className="relative top-px text-[1.2em] -right-1"
               />
               Upgrade
             </Link>{" "}
           </li>
 
-          <li className={style.navItems}>
+          <li className="inline-block sm:px-2 sm:py-1">
             {" "}
             <Link
-              className={
+              className={`relative no-underline shadow-text-custom z-0 transition-colors duration-300 ease-in-out ${
                 location.pathname === "/" && location.hash === ""
-                  ? style.activeNav
-                  : style.navAnchor
-              }
+                  ? "text-fuchsia-500"
+                  : "text-gray-100 hover:text-pink-600"
+              }`}
               to="/"
             >
               <FaHome
-                style={{
-                  position: "relative",
-                  top: "2px",
-                  fontSize: "1.3em",
-                  right: "5px",
-                }}
+                className="relative top-px text-[1.3em] -right-1"
               />
               Home
             </Link>{" "}
           </li>
 
-          <li className={style.navItems}>
+          <li className="inline-block sm:px-2 sm:py-1">
             {" "}
             <HashLink
               smooth
               to="/#mostPopular"
-              className={
+              className={`relative no-underline shadow-text-custom z-0 transition-colors duration-300 ease-in-out ${
                 location.hash === "#mostPopular"
-                  ? style.activeNav
-                  : style.navAnchor
-              }
+                  ? "text-fuchsia-500"
+                  : "text-gray-100 hover:text-pink-600"
+              }`}
             >
               <TbMovie
-                style={{
-                  position: "relative",
-                  top: "2px",
-                  fontSize: "1.3em",
-                  right: "5px",
-                }}
+                className="relative top-px text-[1.3em] -right-1"
               />
               Most Popular
             </HashLink>{" "}
           </li>
-          <li className={style.navItems}>
+          <li className="inline-block sm:px-2 sm:py-1">
             {" "}
             <HashLink
               smooth
               to="/#topRated"
-              className={
+              className={`relative no-underline shadow-text-custom z-0 transition-colors duration-300 ease-in-out ${
                 location.hash === "#topRated"
-                  ? style.activeNav
-                  : style.navAnchor
-              }
+                  ? "text-fuchsia-500"
+                  : "text-gray-100 hover:text-pink-600"
+              }`}
             >
               <BiMovie
-                style={{
-                  position: "relative",
-                  top: "2px",
-                  fontSize: "1.3em",
-                  right: "5px",
-                }}
+                className="relative top-px text-[1.3em] -right-1"
               />
               Top Rated
             </HashLink>{" "}
           </li>
-          <li className={style.navItems}>
+          <li className="inline-block sm:px-2 sm:py-1">
             {" "}
             <Link
-              className={
+              className={`relative no-underline shadow-text-custom z-0 transition-colors duration-300 ease-in-out ${
                 location.pathname === "/Blogs"
-                  ? style.activeNav
-                  : style.navAnchor
-              }
+                  ? "text-fuchsia-500"
+                  : "text-gray-100 hover:text-pink-600"
+              }`}
               to="/Blogs"
             >
               <FaBloggerB
-                style={{
-                  position: "relative",
-                  top: "2px",
-                  fontSize: "1.2em",
-                  right: "5px",
-                }}
+                className="relative top-px text-[1.2em] -right-1"
               />
               Blogs
             </Link>{" "}
           </li>
 
-          <li className={style.navItems}>
+          <li className="inline-block sm:px-2 sm:py-1">
             {
               // checking if the user is logged in
               user?._id ? (
-                <div className={style.navAnchor} onClick={handleLogout}>
-                  <div className={style.userDiv}>
+                <div className="relative no-underline text-gray-100 shadow-text-custom z-0 transition-colors duration-300 ease-in-out hover:text-pink-600" onClick={handleLogout}>
+                  <div className="flex justify-center items-center h-full">
                     <p style={{ cursor: "pointer", marginRight: "1em" }}>
                       Logout
                     </p>
                     {user?.profilePic ? (
                       <img
                         src={user?.profilePic}
-                        className={style.NavbarProfilePic}
+                        className="rounded-full w-9 h-9 mr-4 sm:w-8 sm:h-8 sm:mr-2"
                         alt={user?.name}
                       />
                     ) : (
@@ -197,22 +171,16 @@ const Navbar = () => {
               ) : (
                 // if the user is not logged in
                 <Link
-                  className={
+                  className={`relative no-underline shadow-text-custom z-0 transition-colors duration-300 ease-in-out ${
                     location.pathname === "/Login"
-                      ? style.activeNav
-                      : style.navAnchor
-                  }
+                      ? "text-fuchsia-500"
+                      : "text-gray-100 hover:text-pink-600"
+                  }`}
                   to="/Login"
                 >
-                  <div className={style.userDiv}>
+                  <div className="flex justify-center items-center h-full">
                     <FaCircleUser
-                      style={{
-                        position: "relative",
-                        top: "0.7px",
-                        fontSize: "1.5em",
-                        right: "5px",
-                        borderRadius: "50%",
-                      }}
+                      className="relative top-[0.7px] text-[1.5em] -right-1 rounded-full"
                     />
                     <p>Login</p>
                   </div>
@@ -223,13 +191,13 @@ const Navbar = () => {
           
           {/* Conditionally show Dashboard if user is logged in */}
           {user?._id && (
-            <li className={style.navItems}>
+            <li className="inline-block sm:px-2 sm:py-1">
               <Link
-                className={
+                className={`relative no-underline shadow-text-custom z-0 transition-colors duration-300 ease-in-out ${
                   location.pathname === "/dashboard"
-                    ? style.activeNav
-                    : style.navAnchor
-                }
+                    ? "text-fuchsia-500"
+                    : "text-gray-100 hover:text-pink-600"
+                }`}
                 to="/dashboard"
               >
                 Dashboard
@@ -238,22 +206,17 @@ const Navbar = () => {
           )}
           {/* Conditionally show Wishlist if user is logged in */}
           {user?._id && (
-            <li className={style.navItems}>
+            <li className="inline-block sm:px-2 sm:py-1">
               <Link
-                className={
+                className={`relative no-underline shadow-text-custom z-0 transition-colors duration-300 ease-in-out ${
                   location.pathname === "/wishlist"
-                    ? style.activeNav
-                    : style.navAnchor
-                }
+                    ? "text-fuchsia-500"
+                    : "text-gray-100 hover:text-pink-600"
+                }`}
                 to="/wishlist"
               >
                 <FaHeart
-                  style={{
-                    position: "relative",
-                    top: "2px",
-                    fontSize: "1.2em", // Adjust as needed
-                    right: "5px",
-                  }}
+                  className="relative top-px text-[1.2em] -right-1"
                 />
                 Wishlist
               </Link>

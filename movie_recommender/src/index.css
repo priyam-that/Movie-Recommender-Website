@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Roboto Slab", serif; /* Default font */
+  /* The following styles are moved from style.module.css */
+  background: linear-gradient(120deg, rgb(73, 1, 73), black);
+  height: 100%;
+}
+
+body::-webkit-scrollbar {
+  width: 1em;
+  background: linear-gradient(135deg, rgb(49, 16, 49), black);
+}
+
+body::-webkit-scrollbar-track {
+  border-radius: 5em;
+  background-color: purple;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, rgb(255, 255, 255), rgb(207, 207, 207));
+  border: 6px solid purple;
+  border-radius: 5em;
+}
